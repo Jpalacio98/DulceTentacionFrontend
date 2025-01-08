@@ -7,10 +7,10 @@ A continuación, se detallan los pasos para configurar el entorno de desarrollo 
 Ejecuta el siguiente comando para crear un entorno virtual:
 
 ```bash
-python -m venv venv
+python -m venv env
 ```
 
-Esto creará una carpeta llamada `venv` en el directorio del proyecto que contendrá el entorno virtual.
+Esto creará una carpeta llamada `env` en el directorio del proyecto que contendrá el entorno virtual.
 
 ---
 
@@ -19,13 +19,13 @@ Esto creará una carpeta llamada `venv` en el directorio del proyecto que conten
 - **En Windows**:
 
   ```bash
-  .\venv\Scripts\activate
+  env\Scripts\activate
   ```
 
 - **En macOS/Linux**:
 
   ```bash
-  source venv/bin/activate
+  source env/bin/activate
   ```
 
 Cuando el entorno virtual esté activado, verás el nombre del entorno (por ejemplo, `venv`) al inicio de la línea de comandos.
