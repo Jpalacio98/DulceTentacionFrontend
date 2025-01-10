@@ -42,7 +42,7 @@ def titlebar(page: ft.Page):
     )
     return ft.Container(
         padding=ft.Padding(20,0,5,0),
-        bgcolor=ft.colors.RED,
+        bgcolor=ft.colors.BLACK,
         height=50,
         content=ft.Row(
             [

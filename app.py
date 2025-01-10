@@ -8,8 +8,8 @@ def main(page: ft.Page):
         page.add(main_view(page))
 
     page.title = "App with Sidebar"
-    page.window.width = 500
-    page.window.height = 400
+    page.window.width = 400
+    page.window.height = 500
     page.window.center()
     page.window.resizable = False
     page.window.title_bar_buttons_hidden = True
