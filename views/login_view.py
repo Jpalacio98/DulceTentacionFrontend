@@ -1,6 +1,12 @@
 import flet as ft
 
+
 def login_view(page: ft.Page, switch_to_main_view):
+    page.window.frameless = True  # Elimina el marco del sistema operativo
+    # Fondo transparente para mostrar bordes redondeados
+    page.window.bgcolor = "transparent"
+    page.bgcolor = "transparent"
+
     def on_login_click(e):
         if username.value and password.value:
             switch_to_main_view()
@@ -9,7 +15,7 @@ def login_view(page: ft.Page, switch_to_main_view):
             page.update()
 
     def on_close_click(e):
-         page.window.close()
+        page.window.close()
     # Create UI elements
     username = ft.TextField(label="Username", width=300)
     password = ft.TextField(label="Password", password=True,
@@ -27,7 +33,7 @@ def login_view(page: ft.Page, switch_to_main_view):
         tooltip="Login with GitHub"
     )
     facebook_button = ft.IconButton(
-        content=ft.Image(src="src/image/facebook.png", width=24, height=24),
+        content=ft.Image(src="src/static/bill.png", width=24, height=24),
         tooltip="Login with Facebook"
     )
 
@@ -35,12 +41,12 @@ def login_view(page: ft.Page, switch_to_main_view):
         icon_color=ft.Colors.WHITE, icon=ft.icons.CLOSE, on_click=on_close_click)
 
     # Layout
-   
-    return ft.Stack(
-            [
 
-                ft.Container(
-                    content=ft.Column(
+    return ft.Container(border_radius=30, expand=True, bgcolor='#e3dac9', content=ft.Column(
+        [
+
+            ft.Container(
+                content=ft.Column(
                         [
                             ft.Row([
                                 ft.WindowDragArea(
@@ -67,10 +73,12 @@ def login_view(page: ft.Page, switch_to_main_view):
                         ],
                         alignment="center",
                         horizontal_alignment="center",
-                    ),
-                    alignment=ft.alignment.center,
-                    padding=16,
-                )
-            ]
-        )
-    
+                        ),
+                alignment=ft.alignment.center,
+                padding=16,
+                bgcolor='#e3dac9'
+            )
+        ]
+    )
+
+    )

@@ -9,11 +9,17 @@ def main(page: ft.Page):
 
     page.title = "App with Sidebar"
     page.window.width = 400
-    page.window.height = 500
+    page.window.height = 700
+    ft.Window
     page.window.center()
     page.window.resizable = False
     page.window.title_bar_buttons_hidden = True
     page.window.title_bar_hidden = True
+    page.window.frameless = True
+    # Fondo transparente para mostrar bordes redondeados
+    page.window.bgcolor = "transparent"
+    page.bgcolor = "transparent"
     page.add(login_view(page, switch_to_main_view))
+
 
 ft.app(target=main)
