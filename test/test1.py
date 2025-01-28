@@ -1,45 +1,40 @@
+# import flet as ft
+
 import flet as ft
 
 def main(page: ft.Page):
-    # Configuración de la ventana
-    page.title = "App de Escritorio con Bordes Redondeados"
-    page.window.width = 400
-    page.window.height = 700
-    page.window.center()
-    page.window.frameless = True  # Elimina el marco del sistema operativo
-    page.window.bgcolor = "transparent"  # Fondo transparente para mostrar bordes redondeados
-    page.bgcolor = "transparent"
-
-    # Contenedor principal con bordes redondeados
-    container = ft.Container(
-        content=ft.Column(
-            controls=[
-                ft.Text("¡Bienvenido a tu App!", size=20, color="white"),
-                ft.Row(
-                    controls=[
-                        ft.ElevatedButton("Minimizar", on_click=lambda e: page.window.minimize()),
-                        ft.ElevatedButton("Cerrar", on_click=lambda e: page.window.close()),
-                    ],
-                    alignment="center",
-                ),
-            ],
-            alignment="center",
-            horizontal_alignment="center",
-        ),
-        bgcolor="#4A90E2",  # Color del contenedor
-        border_radius=30,   # Bordes redondeados
-        padding=20,
-        expand=True,
+    # Define el diálogo secundario
+    secondary_dialog = ft.AlertDialog(
+        title=ft.Text("Diálogo Secundario"),
+        content=ft.Text("Este es el diálogo secundario que se abre sin cerrar el primero."),
+        actions=[
+            ft.TextButton("Cerrar", on_click=lambda e: page.close(secondary_dialog)),
+        ],
     )
 
-    # Agregar contenedor a la página
-    page.add(
-        ft.Stack(
-            controls=[
-                container,
-            ],
-            expand=True,
-        )
+    # Define el diálogo principal
+    primary_dialog = ft.AlertDialog(
+        title=ft.Text("Diálogo Principal"),
+        content=ft.Text("Este es el diálogo principal. Puedes abrir otro desde aquí."),
+        actions=[
+            ft.TextButton("Abrir Secundario", on_click=lambda e: page.open(secondary_dialog)),
+            ft.TextButton("Cerrar", on_click=lambda e: page.close(primary_dialog)),
+        ],
     )
 
-ft.app(target=main)
+    # Botón para abrir el diálogo principal
+    open_dialog_button = ft.ElevatedButton(
+        "Abrir Diálogo Principal",
+        on_click=lambda e: page.open(primary_dialog),
+    )
+
+    # Agregar el botón al contenido de la página
+    page.add(open_dialog_button)
+
+    # Configurar los diálogos en la página
+    page.dialog = primary_dialog
+    page.overlay.append(secondary_dialog)  # Asegúrate de agregar el secundario al overlay
+
+    page.update()
+
+ft.app(main)
