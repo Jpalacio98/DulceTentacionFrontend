@@ -2,13 +2,13 @@ from flet import *
 
 
 from app.components.menu import menu
-from app.components.titlebar import titlebar
+from app.components.titlebar import TitleBar
 from app.pages.views.bill_view import bill_view
 from app.pages.views.inventory_view import inventory_view
 from app.pages.views.product_view import product_view
 from app.pages.views.setting_view import settings_view
 from app.pages.views.home_view import home_view
-
+from app.utils.color_schema import *
 
 class MainPage(Column):
     def __init__(self, page: Page):
@@ -58,7 +58,7 @@ class MainPage(Column):
         return Column(
             adaptive=True,
                 controls=[
-                    titlebar(self.page),
+                    TitleBar(page= self.page).build(),
                     Row(
                         [
                             menu(self.on_menu_item_click),
@@ -66,7 +66,7 @@ class MainPage(Column):
                                 content=self.content,
                                 expand=True,
                                 padding=0,
-                                bgcolor=colors.BLACK26
+                                bgcolor=fg_color,
                             ),
                         ],
                         expand=True,

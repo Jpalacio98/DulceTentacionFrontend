@@ -261,7 +261,7 @@ class ItemViewSelect(Container):
                     controls=[
                         Text(self.data.get("ref", "PROD-XXXXXX")),
                         Image(
-                            "static/images/helado.jpg",
+                            "static/images/helado.png",
                             width=100,
                             height=100,
                             fit=ImageFit.COVER,
@@ -338,7 +338,7 @@ class ReplenishItemInventory(Card):
                     bgcolor=Colors.RED_200,
                     content_padding=0,
                     leading=Image(
-                        "static/images/helado.jpg",
+                        "static/images/helado.png",
                         width=50,
                         height=50,
                         fit=ImageFit.COVER,

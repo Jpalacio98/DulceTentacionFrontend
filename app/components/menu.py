@@ -1,4 +1,5 @@
 from app.components.button_menu import ButtonMenu
+from ..utils.color_schema import *
 import flet as ft
 
 
@@ -57,7 +58,7 @@ def menu(on_menu_item_click):
 
     # Contenedor del menú
     container = ft.Container(
-        bgcolor=ft.colors.BLACK45,
+        bgcolor=bg_color_2,
         
         content=ft.Column(
             expand=True,

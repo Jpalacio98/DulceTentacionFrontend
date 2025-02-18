@@ -35,7 +35,7 @@ class ReplenishItemInventory(Card):
                     bgcolor=Colors.RED_200,
                     content_padding=0,
                     leading=Image(
-                        "static/images/helado.jpg",
+                        "static/images/helado.png",
                         width=50,
                         height=50,
                         fit=ImageFit.COVER,

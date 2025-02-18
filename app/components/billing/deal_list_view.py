@@ -2,9 +2,6 @@ from flet import *
 
 from app.components.billing.deal_list_item import DealListItem
 
-
-
-
 class DealListView(Container):
     def __init__(self, items, page=Page):
         super().__init__()

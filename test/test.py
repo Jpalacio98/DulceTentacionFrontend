@@ -1,35 +1,28 @@
+import flet as ft
 
+def main(page: ft.Page):
+    class TextFieldCustom(ft.TextField):
+        def __init__(self, label, **kwargs):
+            super().__init__(
+                label=label,
+                selection_color="#D91E2E",  # Color de selección
+                focus_color= ft.Colors.BLACK,
+                bgcolor="#D91E2E",
+                filled= False,
+                **kwargs
+            )
 
-a=50
-b=10
-c=0
+    def on_submit(e):
+        page.snack_bar = ft.SnackBar(ft.Text(f"Escribiste: {textfield.value}"))
+        page.snack_bar.open = True
+        page.update()
 
-if a>b:
-    print("a es mayor que b")
-else:
-    print("a es menor que b")
-    
-def suma(a, b):
-    c=a+b
-    return c
+    textfield = TextFieldCustom(label="Ingresa texto", on_submit=on_submit)
 
-# funcion sin retorno
-c=suma(a,b)
+    page.add(
+        ft.Column([
+            textfield,
+        ], alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+    )
 
-print(c)
-
-#funcion con retorno
-a=25
-b=150
-
-c=suma(a,b)
-
-print(c)
-
-
-if a>b:
-    print("a es mayor que b")
-else:
-    print("a es menor que b")
-    
-    
+ft.app(target=main)

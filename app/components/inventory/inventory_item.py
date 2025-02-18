@@ -28,7 +28,7 @@ class ItemInventory(Card):
                     alignment=Alignment(0, 0),
                     controls=[
                         Image(
-                            "static/images/helado.jpg",
+                            "static/images/helado.png",
                             width=200,
                             height=300,
                             fit=ImageFit.COVER,
@@ -116,7 +116,7 @@ class ProductoItemInventory(Card):
                     alignment=Alignment(0, 0),
                     controls=[
                         Image(
-                            "static/images/helado.jpg",
+                            "static/images/helado.png",
                             width=90,
                             height=180,
                             fit=ImageFit.COVER,

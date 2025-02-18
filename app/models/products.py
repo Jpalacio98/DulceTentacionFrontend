@@ -1,12 +1,12 @@
 import requests, os
 
 
-class Inventory():
+class Menu():
     def __init__(self):
         super().__init__()
         self.data ={}
         self.headers = {"Content-Type": "application/json"}
-        self.url = os.getenv("BackendUrl")+"/inventory"
+        self.url = os.getenv("BackendUrl")+"/menu"
 
     def add(self, data):
         url = self.url+"/add"

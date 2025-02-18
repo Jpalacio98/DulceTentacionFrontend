@@ -14,11 +14,10 @@ class ProductScrollRow(Container):
         # if self.data is not None:
         #     self.load(self.data)
         self.container = Container(
-            bgcolor=Colors.BLACK,
-            padding=Padding(10, 10, 10, 5),
+            height=350,
+            bgcolor="0x00000000",
+            padding=Padding(10, 5, 10, 5),
             content=Row(
-
-
                 spacing=10,
                 scroll=ScrollMode.ALWAYS,
                 controls=[]
@@ -99,32 +98,34 @@ class BillingSelectProductItem(Card):
     def build(self):
         return Card(
             width=250,
-            height=250,
+            height=300,
             data=self.data,
+            margin=0,
             content=Container(
                 expand=True,
-                bgcolor="0x003434",
+                bgcolor=Colors.RED_200,
                 border_radius=10,
                 content=Column(
+                    alignment=MainAxisAlignment.SPACE_BETWEEN,
                     controls=[
                         Container(
                             width=250,
                             height=150,
-                            bgcolor="0xa1a1a1",
+                            bgcolor="0x00000000",
                             border_radius=10,
                             alignment=alignment.center,
+                            padding=5,
                             content=Image(
-                                "static/images/helado.jpg",
+                                "static/images/helado.png",
                                 expand=1,
                                 width=250,
                                 height=150,
                                 fit=ImageFit.CONTAIN,
-
                                 border_radius=10),
                         ),
                         Container(
-                            bgcolor="0xa1a1a1",
-                            padding=padding.symmetric(0,10),
+                            bgcolor="0x550f0f0f",
+                            padding=padding.symmetric(10,10),
                             content=Row(
                                 alignment=MainAxisAlignment.SPACE_BETWEEN,
                                 controls=[
@@ -136,14 +137,17 @@ class BillingSelectProductItem(Card):
                                                     content=Text(
                                                         self.data['nombre'],
                                                         size=18,
-                                                        weight=FontWeight.BOLD
+                                                        weight=FontWeight.BOLD,
+                                                        color= Colors.WHITE,
+                                                        
                                                     ),
                                                 ),
                                                 Container(
                                                     content=Text(
                                                         f"Ref: {self.data['ref']}",
                                                         size=10,
-                                                        weight=FontWeight.BOLD
+                                                        weight=FontWeight.BOLD,
+                                                        color= Colors.WHITE,
                                                     ),
                                                 ),
                                                 Container(
@@ -153,7 +157,7 @@ class BillingSelectProductItem(Card):
                                                         f"$ { self.data['precio']}",
                                                         size=18,
                                                         weight=FontWeight.NORMAL,
-                                                        color=Colors.RED_600,
+                                                        color="0xd91e2e",
                                                     ),
                                                 ),
                                             ]

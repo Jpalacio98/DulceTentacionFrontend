@@ -1,17 +1,19 @@
 from flet import *
 
+from app.components.billing.add_bill import AddBill
 from app.components.billing.bill_list_view import BillListView
 from app.components.billing.deal_list_view import DealListView
+from app.components.billing.open_cash_drawe import OpenCashDrawer
 from app.components.custom_button import IconButtonAction
 from app.components.dividerCustom import DivCustom
-from app.components.inventory.inventory_add import AddInventory
+from app.utils.color_schema import *
 from app.components.inventory.inventory_replenish import ReplenishInventory
 
 
 class bill_view(Container):
     def __init__(self, page: Page):
         self.page = page
-        self.dlg = AddInventory(self.page)
+        self.dlg = AddBill(self.page)
         self.data = [
             {"nombre": "Manzanas", "ref": "PROD-000001",
              "precio": 41.16, "stock": 245, "unidad": "cm3"},
@@ -55,6 +57,15 @@ class bill_view(Container):
              "precio": 2.38, "stock": 426, "unidad": "cm3"}
         ]
         self.dlgr = ReplenishInventory(self.data, self.page)
+        self.dlgo = OpenCashDrawer(self.page,self.openCashDrawer)
+        self.monto=0
+        self.monto_text =Text(f"$ {self.monto}", weight=FontWeight.BOLD, size=24, text_align=alignment.center)
+
+    def openCashDrawer(self, monto):
+        self.monto=monto
+        self.monto_text.value=f"$ {self.monto}"
+        self.monto_text.update()
+    
 
     def build(self):
         """Crea la estructura principal de la vista"""
@@ -86,8 +97,7 @@ class bill_view(Container):
                                                 alignment=MainAxisAlignment.CENTER,
                                                 horizontal_alignment=CrossAxisAlignment.CENTER,
                                                 controls=[
-                                                    Text(
-                                                        "$ 0,0", weight=FontWeight.BOLD, size=24, text_align=alignment.center),
+                                                    self.monto_text,
                                                     Text(
                                                         "Monto inicial", weight=FontWeight.BOLD, size=15, text_align=alignment.center),
                                                 ]
@@ -192,7 +202,7 @@ class bill_view(Container):
                     Container(
                         expand=1,
                         
-                        bgcolor="green",
+                        bgcolor=bg_color,
                         content=Row(
                             controls=[
                                 IconButtonAction(
@@ -209,15 +219,17 @@ class bill_view(Container):
                                     "Consulltar",
                                     "static/images/bill-search.png",
                                     on_click=lambda e: self.page.open(
-                                        self.dlgr)
+                                        self.dlgo)
                                 ),
                                 IconButtonAction(
                                     "Reporte",
                                     "static/images/bill-report.png"
                                 ),
                                 IconButtonAction(
-                                    "Abbrir caja",
-                                    "static/images/opening.png"
+                                    "Abrir caja",
+                                    "static/images/opening.png",30,
+                                    on_click=lambda e: self.page.open(
+                                        self.dlgo)
                                 ),
                             ],
                             expand=True,
@@ -238,3 +250,4 @@ class bill_view(Container):
             bgcolor="white",
             alignment=alignment.center
         )
+
