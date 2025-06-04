@@ -25,7 +25,7 @@ class MainPage(Column):
         """Crea el contenedor dinámico para las vistas"""
         return Column(
             [
-                Text("Welcome to the main view!", size=24),
+                home_view()
             ],
 
             #alignment=MainAxisAlignment.CENTER,

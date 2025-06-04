@@ -1,4 +1,5 @@
 from flet import *
+from app.utils.color_schema import *
 
 class settings_view(Container):
     def __init__(self, page: Page):
@@ -28,6 +29,6 @@ class settings_view(Container):
             ),
             alignment=alignment.center,
             padding=20,
-            bgcolor="green",
+            bgcolor=bg_color,
             expand=True,
         )

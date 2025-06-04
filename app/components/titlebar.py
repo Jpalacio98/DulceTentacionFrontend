@@ -48,7 +48,7 @@ class TitleBar(Container):
     def build(self):
         return Container(
             padding=Padding(20, 0, 5, 0),
-            bgcolor=bg_color_2,
+            bgcolor=bg_color,
             height=50,
             content=Row(
                 [

@@ -35,3 +35,4 @@ def main(page: ft.Page):
     app.start()
 
 ft.app(target=main)
+
