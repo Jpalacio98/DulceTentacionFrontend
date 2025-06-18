@@ -2,22 +2,25 @@ import flet as ft
 from datetime import datetime
 import threading
 
+# from utils.color_schema import color_h1a  # Asegúrate de que este módulo exista
+
+
 # Componente para la vista Home
 def home_view():
     # Actualización dinámica del reloj
     clock_text = ft.Text("", size=40, weight="bold", color="blue")
-    
+
     def update_clock():
         while True:
             clock_text.value = datetime.now().strftime("%H:%M:%S")
             clock_text.update()
-    
-    #threading.Thread(target=update_clock, daemon=True).start()
+
+    # threading.Thread(target=update_clock, daemon=True).start()
 
     return ft.Container(
         content=ft.Column(
             [
-                ft.Text("Home", size=30, weight="bold"),
+                ft.Text("Home", size=30, weight="bold", color="black"),
                 ft.Image(
                     src="static/images/logo.png",  # Enlace a un logo temporal
                     width=200,

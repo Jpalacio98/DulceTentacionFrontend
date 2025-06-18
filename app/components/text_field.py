@@ -1,67 +1,172 @@
 from flet import *
+from app.utils.color_schema import text_color_1
 
-class TextFieldCustom(TextField):
-    def __init__(self,label,hint_text,password=False, can_reveal_password=True,width=300,height=70, padding=Padding(8,10,8,20),page=Page):
-        super().__init__()
+
+class TextFieldCustom:
+    def __init__(
+        self,
+        label,
+        hint_text,
+        password=False,
+        can_reveal_password=True,
+        width=300,
+        height=70,
+        padding=Padding(8, 10, 8, 20),
+        page=Page,
+    ):
         self.page = page
-        self.label = label,
-        self.hint_text=hint_text
-        self.filled=True
-        self.dense=False
-        self.border=InputBorder.UNDERLINE
-        self.password=password
-        self.can_reveal_password=can_reveal_password
-        self.width=width
-        self.height=height
-        self.content_padding=padding
-        self.fill_color='#00000000'
-        self.focus_color="0xd91e2e",
-        self.textField=TextField(
-            label=self.label,
-            hint_text=self.hint_text,
-            filled=self.filled,
-            dense=self.dense,
-            border=self.border,
-            password=self.password,
-            can_reveal_password=self.can_reveal_password,
-            width=self.width,
-            height=self.height,
-            content_padding=self.content_padding,
-            fill_color=self.fill_color,
-            focus_color=self.focus_color,
-            on_focus=lambda e: self.focus(e),
+        self.is_password = password
+        self.can_reveal_password = can_reveal_password
+
+        # Botón de ojo solo si aplica
+        self.eye_button = (
+            IconButton(
+                icon=icons.VISIBILITY_OFF if self.is_password else None,
+                icon_color=text_color_1,
+                tooltip="Mostrar/Ocultar",
+                on_click=self.toggle_password,
+            )
+            if password and can_reveal_password
+            else None
         )
-        
-        
-    def focus(self,e):
-        self.textField.cursor_color="0xd91e2e"
-        self.textField.hover_color="0x00ffffff"#0x7ad91e2e"
-        self.textField.focused_border_color="0xd91e2e"
-        self.textField.update()
-        print("focus")
+
+        self.text_field = TextField(
+            label=label,
+            hint_text=hint_text,
+            filled=True,
+            dense=False,
+            border=InputBorder.UNDERLINE,
+            password=self.is_password,
+            can_reveal_password=False,  # Control manual
+            width=width,
+            height=height,
+            content_padding=padding,
+            fill_color="#00000000",
+            focus_color="0xd91e2e",
+            text_style=TextStyle(color=text_color_1, size=16, weight=FontWeight.W_500),
+            label_style=TextStyle(color=text_color_1),
+            hint_style=TextStyle(color=text_color_1),
+            on_focus=self.focus,
+            suffix=self.eye_button,
+        )
+
+    def toggle_password(self, e):
+        self.is_password = not self.is_password
+        self.text_field.password = self.is_password
+        self.eye_button.icon = (
+            icons.VISIBILITY_OFF if self.is_password else icons.VISIBILITY
+        )
+        self.text_field.update()
+        self.eye_button.update()
+
+    def focus(self, e):
+        self.text_field.cursor_color = "0xd91e2e"
+        self.text_field.hover_color = "0x00ffffff"
+        self.text_field.focused_border_color = "0xd91e2e"
+        self.text_field.update()
+
     def build(self):
-        return self.textField
+        return self.text_field
 
 
 class TextFieldCustom2(TextField):
-    def __init__(self,hint_text,width=300,height=50,):
-        super().__init__(label="",fit_parent_size=True,hint_text=hint_text,filled=True,dense=False,border=InputBorder.UNDERLINE,width=width,height=height,text_align=TextAlign.CENTER)
+    def __init__(
+        self,
+        hint_text,
+        width=300,
+        height=50,
+    ):
+        super().__init__(
+            label="",
+            fit_parent_size=True,
+            hint_text=hint_text,
+            filled=True,
+            dense=False,
+            border=InputBorder.UNDERLINE,
+            width=width,
+            height=height,
+            text_align=TextAlign.CENTER,
+        )
 
 
 class TextFieldCustom3(TextField):
-    def __init__(self,hint_text,width=300,height=40,):
-        super().__init__(label="",fit_parent_size=True,hint_text=hint_text,filled=True,dense=False,border=InputBorder.UNDERLINE,width=width,height=height,text_align=TextAlign.START,content_padding=padding.only(10,10,10,3),capitalization=TextCapitalization.WORDS)
+    def __init__(
+        self,
+        hint_text,
+        width=300,
+        height=40,
+    ):
+        super().__init__(
+            label="",
+            fit_parent_size=True,
+            hint_text=hint_text,
+            filled=True,
+            dense=False,
+            border=InputBorder.UNDERLINE,
+            width=width,
+            height=height,
+            text_align=TextAlign.START,
+            content_padding=padding.only(10, 10, 10, 3),
+            capitalization=TextCapitalization.WORDS,
+        )
+
 
 class SearchTextFieldCustom(TextField):
-    def __init__(self,hint_text,on_change,width=300,height=40):
-        super().__init__(label="",fit_parent_size=True,hint_text=hint_text,filled=True,dense=False,border=InputBorder.UNDERLINE,width=width,height=height,text_align=TextAlign.CENTER,content_padding=padding.only(10,10,10,3),capitalization=TextCapitalization.WORDS,on_change=on_change)
+    def __init__(self, hint_text, on_change, width=300, height=40):
+        super().__init__(
+            label="",
+            fit_parent_size=True,
+            hint_text=hint_text,
+            filled=True,
+            dense=False,
+            border=InputBorder.UNDERLINE,
+            width=width,
+            height=height,
+            text_align=TextAlign.CENTER,
+            content_padding=padding.only(10, 10, 10, 3),
+            capitalization=TextCapitalization.WORDS,
+            on_change=on_change,
+        )
+
 
 class SearchTextFieldCustom2(TextField):
-    def __init__(self,hint_text,on_change,width=None,height=40, expand=1):
-        super().__init__(label="",fit_parent_size=True,hint_text=hint_text,filled=True,dense=False,border=InputBorder.UNDERLINE,width=width,height=height,text_align=TextAlign.CENTER,content_padding=padding.only(10,10,10,3),capitalization=TextCapitalization.WORDS,on_change=on_change,expand=expand)
-        
+    def __init__(self, hint_text, on_change, width=None, height=40, expand=1):
+        super().__init__(
+            label="",
+            fit_parent_size=True,
+            hint_text=hint_text,
+            filled=True,
+            dense=False,
+            border=InputBorder.UNDERLINE,
+            width=width,
+            height=height,
+            text_align=TextAlign.CENTER,
+            content_padding=padding.only(10, 10, 10, 3),
+            capitalization=TextCapitalization.WORDS,
+            on_change=on_change,
+            expand=expand,
+        )
+
 
 class PlainTextField(TextField):
-    def __init__(self,hint_text,width=200,height=150,):
-        super().__init__(fit_parent_size=True,label="",hint_text=hint_text,filled=True,dense=False,expand=True,expand_loose=True,border=InputBorder.UNDERLINE,width=width,height=height,text_align=TextAlign.START,multiline=True,capitalization=TextCapitalization.SENTENCES)
-        
+    def __init__(
+        self,
+        hint_text,
+        width=200,
+        height=150,
+    ):
+        super().__init__(
+            fit_parent_size=True,
+            label="",
+            hint_text=hint_text,
+            filled=True,
+            dense=False,
+            expand=True,
+            expand_loose=True,
+            border=InputBorder.UNDERLINE,
+            width=width,
+            height=height,
+            text_align=TextAlign.START,
+            multiline=True,
+            capitalization=TextCapitalization.SENTENCES,
+        )

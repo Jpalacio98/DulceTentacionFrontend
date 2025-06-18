@@ -21,32 +21,56 @@ def menu(on_menu_item_click):
 
     # Lista de ítems del menú con íconos
     menu_items = [
-        {"icon": "static/images/heladeria.png", "label": "Inicio",
-            "on_click": lambda _: on_menu_item_click("home")},
-        {"icon": "static/images/cajero-automatico.png", "label": "Facturacion",
-            "on_click": lambda _: on_menu_item_click("billing")},
-        {"icon": "static/images/menu.png", "label": "Productos",
-            "on_click": lambda _: on_menu_item_click("menu")},
-        {"icon": "static/images/fruta.png", "label": "Inventario",
-            "on_click": lambda _: on_menu_item_click("inventory")},
-        {"icon": "static/images/budget.png", "label": "Contabilidad",
-            "on_click": lambda _: on_menu_item_click("accounting")},
-        {"icon": "static/images/analytics.png", "label": "Reportes",
-            "on_click": lambda _: on_menu_item_click("reports")},
-        {"icon": "static/images/vendedor.png", "label": "Perfil",
-            "on_click": lambda _: on_menu_item_click("settings")},
+        {
+            "icon": "static/images/heladeria.png",
+            "label": "Inicio",
+            "on_click": lambda _: on_menu_item_click("home"),
+        },
+        {
+            "icon": "static/images/cajero-automatico.png",
+            "label": "Facturacion",
+            "on_click": lambda _: on_menu_item_click("billing"),
+        },
+        {
+            "icon": "static/images/menu.png",
+            "label": "Productos",
+            "on_click": lambda _: on_menu_item_click("menu"),
+        },
+        {
+            "icon": "static/images/fruta.png",
+            "label": "Inventario",
+            "on_click": lambda _: on_menu_item_click("inventory"),
+        },
+        {
+            "icon": "static/images/budget.png",
+            "label": "Contabilidad",
+            "on_click": lambda _: on_menu_item_click("accounting"),
+        },
+        {
+            "icon": "static/images/analytics.png",
+            "label": "Reportes",
+            "on_click": lambda _: on_menu_item_click("reports"),
+        },
+        {
+            "icon": "static/images/vendedor.png",
+            "label": "Perfil",
+            "on_click": lambda _: on_menu_item_click("settings"),
+        },
     ]
 
     # Crear botones del menú
     menu_buttons = [
-        ButtonMenu(item["icon"], item["label"],
-                    item["on_click"], OnHover=False)
+        ButtonMenu(item["icon"], item["label"], item["on_click"], OnHover=False)
         for item in menu_items
-    ]
-
-    # Título del menú con ícono y texto animado
+    ]  # Título del menú con ícono y texto animado
     menu_title_text = ft.Text(
-        "Menu", opacity=0, animate_opacity=300, size=20, weight="bold")
+        "Menu",
+        opacity=0,
+        animate_opacity=300,
+        size=20,
+        weight="bold",
+        color=text_color_1,  # Color negro para el título
+    )
     menu_title = ft.Row(
         [
             ft.Icon(ft.icons.MENU, size=24),
@@ -59,16 +83,18 @@ def menu(on_menu_item_click):
     # Contenedor del menú
     container = ft.Container(
         bgcolor=bg_color_2,
-        
         content=ft.Column(
             expand=True,
             expand_loose=True,
             controls=[
                 menu_title,
                 ft.Column(
-                    [*menu_buttons,],alignment=ft.MainAxisAlignment.START
-                )
-                  # Añadir botones del menú
+                    [
+                        *menu_buttons,
+                    ],
+                    alignment=ft.MainAxisAlignment.START,
+                ),
+                # Añadir botones del menú
             ],
             alignment="start",
             spacing=16,
