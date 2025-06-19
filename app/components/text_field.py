@@ -1,5 +1,5 @@
 from flet import *
-from app.utils.color_schema import text_color_1
+from app.utils.color_schema import text_color_1, text_color_2
 
 
 class TextFieldCustom:
@@ -100,7 +100,7 @@ class TextFieldCustom3(TextField):
             label="",
             fit_parent_size=True,
             hint_text=hint_text,
-            filled=True,
+            filled=False,
             dense=False,
             border=InputBorder.UNDERLINE,
             width=width,
@@ -108,6 +108,19 @@ class TextFieldCustom3(TextField):
             text_align=TextAlign.START,
             content_padding=padding.only(10, 10, 10, 3),
             capitalization=TextCapitalization.WORDS,
+            bgcolor=Colors.TRANSPARENT,
+            color=Colors.BLACK,
+            text_style=TextStyle(
+                color=Colors.BLACK,
+                size=14,
+            ),
+            hint_style=TextStyle(
+                color=Colors.BLACK54,
+                size=14,
+            ),
+            border_color=Colors.BLACK,
+            focused_border_color=Colors.BLACK,
+            cursor_color=Colors.BLACK,
         )
 
 

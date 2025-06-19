@@ -56,6 +56,11 @@ def menu(on_menu_item_click):
             "label": "Perfil",
             "on_click": lambda _: on_menu_item_click("settings"),
         },
+        {
+            "icon": "static/images/vendor.png",
+            "label": "Proveedores",
+            "on_click": lambda _: on_menu_item_click("suppliers"),
+        },
     ]
 
     # Crear botones del menú

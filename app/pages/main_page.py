@@ -8,7 +8,9 @@ from app.pages.views.inventory_view import inventory_view
 from app.pages.views.product_view import product_view
 from app.pages.views.setting_view import settings_view
 from app.pages.views.home_view import home_view
+from app.pages.views.suppliers_view import suppliers_view
 from app.utils.color_schema import *
+
 
 class MainPage(Column):
     def __init__(self, page: Page):
@@ -24,12 +26,9 @@ class MainPage(Column):
     def _create_content(self):
         """Crea el contenedor dinámico para las vistas"""
         return Column(
-            [
-                home_view()
-            ],
-
-            #alignment=MainAxisAlignment.CENTER,
-            #horizontal_alignment=CrossAxisAlignment.CENTER
+            [home_view()],
+            # alignment=MainAxisAlignment.CENTER,
+            # horizontal_alignment=CrossAxisAlignment.CENTER
         )
 
     def on_menu_item_click(self, item):
@@ -46,10 +45,10 @@ class MainPage(Column):
             self.content.controls.append(product_view(self.page).build())
         elif item == "settings":
             self.content.controls.append(settings_view(self.page).build())
+        elif item == "suppliers":
+            self.content.controls.append(suppliers_view(self.page).build())
         else:
-            self.content.controls.append(
-                Text(f"View: {item}", size=24)
-            )
+            self.content.controls.append(Text(f"View: {item}", size=24))
 
         self.content.update()
 
@@ -57,27 +56,25 @@ class MainPage(Column):
         """Crea la estructura principal de la vista"""
         return Column(
             adaptive=True,
-                controls=[
-                    TitleBar(page= self.page).build(),
-                    Row(
-                        [
-                            menu(self.on_menu_item_click),
-                            Container(
-                                content=self.content,
-                                expand=True,
-                                padding=0,
-                                bgcolor=fg_color,
-                            ),
-                        ],
-                        expand=True,
-                        spacing=0,
-                    ),
-                ],
-                expand=True,
-                spacing=0,
-               
-            )
-        
+            controls=[
+                TitleBar(page=self.page).build(),
+                Row(
+                    [
+                        menu(self.on_menu_item_click),
+                        Container(
+                            content=self.content,
+                            expand=True,
+                            padding=0,
+                            bgcolor=fg_color,
+                        ),
+                    ],
+                    expand=True,
+                    spacing=0,
+                ),
+            ],
+            expand=True,
+            spacing=0,
+        )
 
     def build(self):
         """Retorna la vista principal"""

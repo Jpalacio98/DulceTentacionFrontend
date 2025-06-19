@@ -30,7 +30,7 @@ class App:
     def start(self):
         self.page.go(self.page.route)
 
-def main(page: ft.Page):
+def main(page: ft.Page):    
     app = App(page)
     app.start()
 
