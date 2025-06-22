@@ -9,6 +9,8 @@ from app.pages.views.product_view import product_view
 from app.pages.views.setting_view import settings_view
 from app.pages.views.home_view import home_view
 from app.pages.views.suppliers_view import suppliers_view
+from app.pages.views.categories_view import CategoriesView
+from app.pages.views.employees_view import EmployeesView
 from app.utils.color_schema import *
 
 
@@ -47,6 +49,10 @@ class MainPage(Column):
             self.content.controls.append(settings_view(self.page).build())
         elif item == "suppliers":
             self.content.controls.append(suppliers_view(self.page).build())
+        elif item == "categories":
+            self.content.controls.append(CategoriesView(self.page).build())
+        elif item == "employees":
+            self.content.controls.append(EmployeesView(self.page).build())
         else:
             self.content.controls.append(Text(f"View: {item}", size=24))
 

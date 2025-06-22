@@ -1,9 +1,9 @@
 from flet import *
-from app.components.suppliers.supplier_card import SupplierCard
+from .employee_card import EmployeeCard
 
 
-class SuppliersGrid(Container):
-    def __init__(self, items=list | None, page=Page, on_delete=None, on_edit=None):
+class EmployeesGrid(Container):
+    def __init__(self, items=None, page=Page, on_delete=None, on_edit=None):
         super().__init__()
         self.page = page
         self.items = items if items else []
@@ -24,7 +24,6 @@ class SuppliersGrid(Container):
         self.content = self.grid
         self.expand = True
         self.padding = padding.all(10)  # Padding reducido
-        self.loadGrid()
 
     def build(self):
         self.loadGrid()
@@ -38,41 +37,7 @@ class SuppliersGrid(Container):
         )  # Espaciado reducido
 
         for item in self.items:
-            item_w = SupplierCard(
-                item,
-                self.page,
-                on_delete=self.on_delete,
-                on_edit=self.on_edit,
-            )
-            if row_count < self.cols:
-                row_grid.controls.append(item_w.build())
-                row_count += 1
-            else:
-                self.grid.controls.append(row_grid)
-                row_grid = Row(
-                    alignment=MainAxisAlignment.SPACE_EVENLY, expand=True, spacing=10
-                )
-                row_grid.controls.append(item_w.build())
-                row_count = 1
-
-        if row_grid.controls:
-            self.grid.controls.append(row_grid)
-
-    def filter(self, e):
-        search = e.control.value.lower()
-        filtered_items = [item for item in self.items if search in item["name"].lower()]
-        self.grid.controls.clear()
-        self.loadGridFilter(filtered_items)
-        self.grid.update()
-
-    def loadGridFilter(self, items):
-        row_count = 0
-        row_grid = Row(
-            alignment=MainAxisAlignment.SPACE_EVENLY, expand=True, spacing=10
-        )  # Espaciado reducido
-
-        for item in items:
-            item_w = SupplierCard(
+            item_w = EmployeeCard(
                 item,
                 self.page,
                 on_delete=self.on_delete,
