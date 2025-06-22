@@ -17,12 +17,33 @@ class AddEmployee(AlertDialog):
         self.shadow_color = Colors.RED_300
         self.is_editing = False
         self.on_save = None
+        self.photo_path = None
 
         # Campos del formulario
         self.name_field = TextFieldCustom3("Nombre", width=400)
         self.email_field = TextFieldCustom3("Correo", width=400)
         self.role_field = TextFieldCustom3("Rol", width=400)
         self.phone_field = TextFieldCustom3("Teléfono", width=400)
+
+        # FilePicker para la foto
+        self.file_picker = FilePicker(on_result=self.on_file_selected)
+        self.photo_preview = Image(
+            src="",
+            width=80,
+            height=80,
+            border_radius=40,
+            fit=ImageFit.COVER,
+            visible=False,
+        )
+        self.pick_button = ElevatedButton(
+            text="Seleccionar Foto",
+            bgcolor=color_h1,
+            color=text_color_2,
+            width=200,
+            on_click=lambda e: self.file_picker.pick_files(
+                allow_multiple=False, allowed_extensions=["png", "jpg", "jpeg"]
+            ),
+        )
 
         # Textos dinámicos
         self.modal_title = Text(
@@ -72,26 +93,41 @@ class AddEmployee(AlertDialog):
 
         self.content = Container(
             width=450,
-            height=320,
+            height=540,
             bgcolor="#FEFAE9",
             border_radius=BorderRadius(0, 0, 15, 15),
             padding=padding.only(top=20, left=20, right=20, bottom=30),
             content=Column(
                 [
-                    Column(
-                        [
-                            self.name_field,
-                            self.email_field,
-                            self.role_field,
-                            self.phone_field,
-                        ],
-                        spacing=15,
+                    Row(
+                        [self.photo_preview],
+                        alignment=MainAxisAlignment.CENTER,
                     ),
+                    self.pick_button,
+                    self.name_field,
+                    self.email_field,
+                    self.role_field,
+                    self.phone_field,
                     Container(height=20),
-                    Row([self.save_button], alignment=MainAxisAlignment.CENTER),
-                ]
+                    Row(
+                        [self.save_button],
+                        alignment=MainAxisAlignment.CENTER,
+                    ),
+                ],
+                spacing=15,
             ),
         )
+        self.controls = [self.file_picker]
+        if self.file_picker not in self.page.overlay:
+            self.page.overlay.append(self.file_picker)
+            self.page.update()
+
+    def on_file_selected(self, e):
+        if e.files and len(e.files) > 0:
+            self.photo_path = e.files[0].path
+            self.photo_preview.src = self.photo_path
+            self.photo_preview.visible = True
+            self.page.update()
 
     def save_employee(self, e):
         data = {
@@ -99,6 +135,7 @@ class AddEmployee(AlertDialog):
             "email": self.email_field.value,
             "role": self.role_field.value,
             "phone": self.phone_field.value,
+            "photo": self.photo_path,
         }
         if self.on_save:
             self.on_save(data)
@@ -113,6 +150,12 @@ class AddEmployee(AlertDialog):
         self.email_field.value = employee_data["email"]
         self.role_field.value = employee_data["role"]
         self.phone_field.value = employee_data["phone"]
+        self.photo_path = employee_data.get("photo", None)
+        if self.photo_path:
+            self.photo_preview.src = self.photo_path
+            self.photo_preview.visible = True
+        else:
+            self.photo_preview.visible = False
         self.page.update()
         self.page.open(self)
 
@@ -125,6 +168,8 @@ class AddEmployee(AlertDialog):
         self.email_field.value = ""
         self.role_field.value = ""
         self.phone_field.value = ""
+        self.photo_path = None
+        self.photo_preview.visible = False
         self.page.update()
         self.page.open(self)
 

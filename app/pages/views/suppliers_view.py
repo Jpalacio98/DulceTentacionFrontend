@@ -65,16 +65,21 @@ class suppliers_view(Container):
             bgcolor=bg_color_2,
             content=Column(
                 [
-                    Text(
-                        "Panel de Configuracion de Proveedores",
-                        size=40,
-                        color=text_color_1,
+                    Row(
+                        [
+                            Text(
+                                "Panel de Configuracion de Proveedores",
+                                size=40,
+                                color=text_color_1,
+                            )
+                        ],
+                        alignment=MainAxisAlignment.CENTER,
                     ),
                     Container(height=20),
                     self.grid,
                     Container(
                         height=90,
-                        bgcolor=Colors.WHITE,
+                        bgcolor="#FEFAE9",
                         content=Row(
                             controls=[
                                 FloatingActionButton(

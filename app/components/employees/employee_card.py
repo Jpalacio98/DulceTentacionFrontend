@@ -13,6 +13,7 @@ class EmployeeCard(Card):
             "email": data.get("email", ""),
             "role": data.get("role", ""),
             "phone": data.get("phone", ""),
+            "photo": data.get("photo", None),
         }
 
     def handle_delete(self, e):
@@ -29,89 +30,69 @@ class EmployeeCard(Card):
             content=Container(
                 bgcolor="#FEFAE9",
                 border_radius=10,
-                width=300,
+                width=200,
+                border=border.all(2, color_h1),
                 content=Column(
                     [
-                        # Header rojo con nombre
                         Container(
-                            bgcolor=color_h1,
-                            padding=padding.symmetric(horizontal=15, vertical=10),
-                            border_radius=border_radius.only(top_left=10, top_right=10),
-                            content=Row(
-                                [
-                                    Text(
-                                        self.data["name"],
-                                        color=colors.WHITE,
-                                        weight=FontWeight.BOLD,
-                                        size=14,
-                                    )
-                                ]
-                            ),
-                        ),
-                        # Contenido con la información
-                        Container(
-                            padding=padding.all(15),
+                            alignment=alignment.center,
                             content=Column(
                                 [
-                                    Row(
-                                        [
-                                            Text(
-                                                "Correo:",
-                                                weight=FontWeight.BOLD,
-                                                color=colors.BLACK,
-                                            ),
-                                            Text(
-                                                self.data["email"], color=colors.BLACK
-                                            ),
-                                        ]
-                                    ),
-                                    Row(
-                                        [
-                                            Text(
-                                                "Rol:",
-                                                weight=FontWeight.BOLD,
-                                                color=colors.BLACK,
-                                            ),
-                                            Text(self.data["role"], color=colors.BLACK),
-                                        ]
-                                    ),
-                                    Row(
-                                        [
-                                            Text(
-                                                "Teléfono:",
-                                                weight=FontWeight.BOLD,
-                                                color=colors.BLACK,
-                                            ),
-                                            Text(
-                                                self.data["phone"], color=colors.BLACK
-                                            ),
-                                        ]
-                                    ),
-                                    # Botones de acción
                                     Container(
-                                        content=Row(
-                                            [
-                                                IconButton(
-                                                    icon=icons.DELETE_OUTLINE,
-                                                    icon_color=color_h1,
-                                                    tooltip="Eliminar",
-                                                    on_click=self.handle_delete,
-                                                ),
-                                                IconButton(
-                                                    icon=icons.EDIT,
-                                                    icon_color=color_h1,
-                                                    tooltip="Editar",
-                                                    on_click=self.handle_edit,
-                                                ),
-                                            ],
-                                            alignment=MainAxisAlignment.CENTER,
-                                        )
+                                        width=100,
+                                        height=100,
+                                        border_radius=50,
+                                        alignment=alignment.center,
+                                        border=border.all(3, color_h1),
+                                        content=Image(
+                                            src=self.data["photo"]
+                                            or "static/images/user.png",
+                                            width=90,
+                                            height=90,
+                                            border_radius=45,
+                                            fit=ImageFit.COVER,
+                                        ),
+                                    ),
+                                    Text(
+                                        self.data["name"],
+                                        color=color_h1,
+                                        weight=FontWeight.BOLD,
+                                        size=22,
+                                        text_align=TextAlign.CENTER,
+                                    ),
+                                    Text(
+                                        self.data["role"],
+                                        color=colors.BLACK,
+                                        weight=FontWeight.BOLD,
+                                        size=16,
+                                        text_align=TextAlign.CENTER,
                                     ),
                                 ],
-                                spacing=10,
+                                horizontal_alignment=CrossAxisAlignment.CENTER,
+                                spacing=8,
                             ),
+                            padding=padding.only(top=20, bottom=10),
                         ),
-                    ]
+                        Row(
+                            [
+                                IconButton(
+                                    icon=icons.DELETE_OUTLINE,
+                                    icon_color=color_h1,
+                                    tooltip="Eliminar",
+                                    on_click=self.handle_delete,
+                                ),
+                                IconButton(
+                                    icon=icons.EDIT,
+                                    icon_color=color_h1,
+                                    tooltip="Editar",
+                                    on_click=self.handle_edit,
+                                ),
+                            ],
+                            alignment=MainAxisAlignment.CENTER,
+                        ),
+                    ],
+                    horizontal_alignment=CrossAxisAlignment.CENTER,
+                    spacing=0,
                 ),
             ),
         )

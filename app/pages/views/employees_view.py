@@ -55,16 +55,21 @@ class EmployeesView(Container):
             bgcolor=bg_color_2,
             content=Column(
                 [
-                    Text(
-                        "Panel de Configuración de Empleados",
-                        size=40,
-                        color=text_color_1,
+                    Row(
+                        [
+                            Text(
+                                "Panel de Configuración de Empleados",
+                                size=40,
+                                color=text_color_1,
+                            )
+                        ],
+                        alignment=MainAxisAlignment.CENTER,
                     ),
                     Container(height=20),
                     self.grid,
                     Container(
                         height=90,
-                        bgcolor=colors.WHITE,
+                        bgcolor="#FEFAE9",
                         content=Row(
                             controls=[
                                 FloatingActionButton(

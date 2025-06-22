@@ -55,16 +55,21 @@ class CategoriesView(ft.Container):
             bgcolor=bg_color_2,
             content=ft.Column(
                 [
-                    ft.Text(
-                        "Panel de Configuración de Categorías",
-                        size=40,
-                        color=text_color_1,
+                    ft.Row(
+                        [
+                            ft.Text(
+                                "Panel de Configuración de Categorías",
+                                size=40,
+                                color=text_color_1,
+                            )
+                        ],
+                        alignment=ft.MainAxisAlignment.CENTER,
                     ),
                     ft.Container(height=20),
                     self.grid,
                     ft.Container(
                         height=90,
-                        bgcolor=ft.colors.WHITE,
+                        bgcolor="#FEFAE9",
                         content=ft.Row(
                             controls=[
                                 ft.FloatingActionButton(
